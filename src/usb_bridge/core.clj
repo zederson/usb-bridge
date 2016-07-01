@@ -1,6 +1,6 @@
 (ns usb-bridge.core
   (:gen-class)
-  (:require [usb-bridge.configuration :as configuration]))
+  (:require [usb-bridge.configuration :as configuration] ))
 
 (use 'serial.core)
 (import '(java.io BufferedReader InputStreamReader))
@@ -9,7 +9,6 @@
   "I don't do a whole lot ... yet."
   [& args]
   (println "Hello, World!"))
-
 
 (def usb (open configuration/port :baud-rate configuration/baud-rate))
 
@@ -25,7 +24,6 @@
       (.close stream))
 
 
-
 (listen! usb(fn [in-stream] (content-read in-stream)))
 
-(close! usb)
+;; (close! usb)

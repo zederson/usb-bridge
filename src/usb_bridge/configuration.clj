@@ -1,4 +1,10 @@
-(ns usb-bridge.configuration)
+(ns usb-bridge.configuration
+  (:require [clj-yaml.core :as yaml]))
 
-(def port "/dev/cu.usbserial-AD024I1S")
-(def baud-rate 9600)
+(def path "./resources/usb_bridge.yml")
+
+(def read-configuration
+  (yaml/parse-string (slurp path)))
+
+(def port (-> read-configuration :arduino :port))
+(def baud-rate (-> read-configuration :arduino :baud_rate))
