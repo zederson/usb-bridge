@@ -1,10 +1,13 @@
 (ns usb-bridge.configuration
-  (:require [clj-yaml.core :as yaml]))
+  (:require [clojure.java.io :as io])
+  (:import  [java.io PushbackReader]))
 
-(def path "./resources/usb_bridge.yml")
+(def PATH "./resources/application_config.clj")
 
-(def read-configuration
-  (yaml/parse-string (slurp path)))
+(def config
+  (with-open [r (io/reader PATH)]
+    (read (PushbackReader. r))))
 
-(def port (-> read-configuration :arduino :port))
-(def baud-rate (-> read-configuration :arduino :baud_rate))
+(def port (-> (config :arduino) :port))
+(def baud-rate (-> (config :arduino) :baud_rate))
+
