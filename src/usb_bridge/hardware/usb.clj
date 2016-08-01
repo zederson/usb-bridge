@@ -11,8 +11,6 @@
     (let [buff-reader (BufferedReader. (InputStreamReader. stream))]
       (handler (.readLine buff-reader)))))
 
-
-
 (defn reader [handler]
   (serial/listen usb (process-reader handler)))
 
